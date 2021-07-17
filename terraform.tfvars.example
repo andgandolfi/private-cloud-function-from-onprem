@@ -1,0 +1,6 @@
+billing_account_id = "XXXXXX-XXXXXX-XXXXXX"
+onprem_project_id = "your-onprem-project-id"
+gcp_project_id = "your-gcp-project-id"
+create_projects = true
+root_id = "folders/XXXXXXXXXXXXXX"
+cloud_function_gcs_bucket = "cloud-function-staging-bucket"
