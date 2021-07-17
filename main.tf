@@ -15,71 +15,6 @@
  */
 
 ###############################################################################
-#                                  variables                                  #
-###############################################################################
-
-variable "region" {
-  type    = string
-  default = "europe-west1"
-  # Region where the resources will be created
-}
-
-variable "zone" {
-  type    = string
-  default = "europe-west1-b"
-  # Zone where the test VM will be created
-}
-
-variable "billing_account_id" {
-  type    = string
-  # Your billing account ID, in the format "XXXXXX-XXXXXX-XXXXXX"
-}
-
-variable "onprem_project_id" {
-  type    = string
-  # Project ID used as "on-prem" environment
-}
-
-variable "gcp_project_id" {
-  type    = string
-  # Project ID used as "GCP" environment
-}
-
-variable "create_projects" {
-  type    = bool
-  default = true
-  # Whether terraform will create the projects (false if the projects already exist)
-}
-
-variable "root_id" {
-  type    = string
-  # Root folder or organization under which the projects will be created, in the format "folders/XXXXXXXXXXXX" or "organizations/XXXXXXXXXXXX"
-}
-
-variable "cloud_function_gcs_bucket" {
-  type    = string
-  # Google Storage Bucket used as staging location for the Cloud Function source code
-}
-
-variable "onprem_ip_range" {
-  type    = string
-  default = "10.0.1.0/24"
-  # IP ranged used for the "on-prem" VPC
-}
-
-variable "gcp_ip_range" {
-  type    = string
-  default = "10.0.2.0/24"
-  # IP ranged used for the "GCP" VPC
-}
-
-variable "psc_endpoint" {
-  type    = string
-  default = "10.100.100.100"
-  # IP used for the Private Service Connect endpoint, it must not overlap with the gcp_ip_range
-}
-
-###############################################################################
 #                                  projects                                   #
 ###############################################################################
 
@@ -363,12 +298,4 @@ resource "google_compute_global_forwarding_rule" "psc-endpoint" {
   ip_address            = google_compute_global_address.psc-address.id
   target                = "vpc-sc"
   load_balancing_scheme = ""
-}
-
-###############################################################################
-#                                OUTPUTS                                      #
-###############################################################################
-
-output "function" {
-  value = module.function-hello.function.https_trigger_url
 }
